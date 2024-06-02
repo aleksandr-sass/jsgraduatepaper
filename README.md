@@ -143,7 +143,21 @@ sendBtn.addEventListener('click', () => {
 
 1. Шаг: это будет обычный html-файл, вызываемый emmetoм из шаблона "!", с той лишь разницей, что в области **head** мы будем подключать файл ```app.js```.
 
-* Задача 6
+* Задача 06: подготовить JS-код для чтения из firebase.
+
+А код до безумия прост:
+
+```
+// app.js
+fetch('https://jsbymda-default-rtdb.firebaseio.com/db.json')
+.then(response => {
+    return response.json();
+})
+.then(response => {
+    console.log(response);
+    console.log(response.length);
+});
+```
 
 1. Шаг
 

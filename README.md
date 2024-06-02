@@ -36,8 +36,57 @@ JS Graduate Paperwork. JS by MDA. 2024Q2
 * Замечание 2
 
 ### Ценные указания
-* Указание 1
-* Указание 2
+* Указание 1: чтение из firebase:
+
+```
+const getCards = () => {
+    fetch('https://test4-d0426-default-rtdb.firebaseio.com/db.json')
+    .then(response => {
+        return response.json()
+    })
+    .then(cards => {
+        if (localStorage.getItem('user')){
+            const user = JSON.parse(localStorage.getItem('user'))
+            const newArr = cards.map(card => {
+                card.price = card.price-(card.price*user[0].discont/100)
+                return card
+            })
+            localStorage.setItem('cards', JSON.stringify(newArr))
+        } else {
+            localStorage.setItem('cards', JSON.stringify(cards))
+        }                   
+    })
+}
+getCards()
+```
+
+* Указание 2: запись в firebase:
+
+```
+const sendBtn = document.querySelector('.send__btn');
+const sendForm = document.querySelector('.send__form');
+let i = 0;
+
+sendBtn.addEventListener('click', () => {
+  console.log(i++);
+  const order = {};
+  for (const el of sendForm.elements) {
+    order[el.name] = el.value;
+    
+  }
+  const shopCart = JSON.parse(localStorage.getItem('shopCart'));
+  order.shopCart = shopCart;
+  
+  const time = new Date();
+  
+  order.time = time.toLocaleString();
+  console.log(order);
+  const firebase = new Firebase(`https://test4-d0426-default-rtdb.firebaseio.com/orders/order${i}`);
+  firebase.update(order);
+  console.log(firebase);
+  
+})
+```
 
 ### Решение
 

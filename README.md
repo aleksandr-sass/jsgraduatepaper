@@ -13,9 +13,9 @@ JS Graduate Paperwork. JS by MDA. 2024Q2
 * Задача 08: все стилизовать в CSS по БЭМу и по красоте.(пока пропускаю этот пункт...)
 * Задача 09: запомнить разработанную структуру данных, использованную в firebase.(+)
 * Задача 10: снести firebase.(пока что тоже пропускаю этот пункт...)
-* Задача 11: подготовить html-код для записи в firebase.
-* Задача 12: подготовить JS-код для записи в firebase.
-* Задача 13: заполнить firebase тестовыми данными, уже используя написанную для этого web-страницу.
+* Задача 11: подготовить html-код для записи в firebase.(+)
+* Задача 12: подготовить JS-код для записи в firebase.(+)
+* Задача 13: заполнить firebase тестовыми данными, уже используя написанную для этого web-страницу.(+)
 * Задача 14: хорошенько все протестировать: можно ли все эти данные получить обратно из firebase?
 * Задача 15: все стилизовать в CSS по БЭМу и по красоте.
 * Задача 16: выявить хотя бы три самых слабых места в моей выпускной работе.
@@ -24,8 +24,8 @@ JS Graduate Paperwork. JS by MDA. 2024Q2
 * Задача 19: найти ещё хотя бы один "косяк".
 * Задача 20: попытаться его исправить.
 * Задача 21: снова хорошенько все протестировать: записываются ли номера? читаются ли они из firebase?
-* Задача 22: ФИНАЛОЧКА: записать видос.
-* Задача 23: ФИНАЛОЧКА: отправить видос и проект на проверку.
+* Задача 22: ФИНАЛОЧКА: записать видос. (бета)
+* Задача 23: ФИНАЛОЧКА: отправить видос и проект на проверку. (бета)
 * Задача 24: если замечания есть, то перейти к циклу из пунктов: 16-18, 22+23. Ждать ответа преподавателя.
 * Задача 25: если КРИТИЧЕСКИЕ замечания всё-таки отсутствуют, то начинать писать речь для выступления.
 * Задача 26: дать своему "детищу" хоть какое-то человекочитаемое название. Например: "Прототип web-приложения для записи на IT-курсы для ООО 'МАРР'"
@@ -86,6 +86,12 @@ sendBtn.addEventListener('click', () => {
   console.log(firebase);
   
 })
+```
+
+* Указание 3: подключение JS-библиотеки для работы с firebase:
+
+```
+<script src="https://cdn.firebase.com/js/client/1.1.1/firebase.js"></script>
 ```
 
 ### Решение
@@ -195,7 +201,58 @@ fetch('https://jsbymda-default-rtdb.firebaseio.com/db.json')
 
 4. Шаг
 
-* Задача 11
+* Задача 11-14
+
+1. Шаг: HTML
+
+```
+// register.html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>МАРР: запись на ИТ-курсы</title>
+</head>
+<body>
+    <form action="">
+        <input type="number" class="tel"><br>
+        <button class="btn">Send</button>
+    </form>
+    <script src="https://cdn.firebase.com/js/client/1.1.1/firebase.js"></script>
+    <script src="reg.js"></script>
+</body>
+</html>
+```
+
+2. Шаг: JS
+
+```
+// reg.js
+const tel = document.querySelector('.tel');
+const btn = document.querySelector('.btn');
+
+
+const handler = (e) => {
+    e.preventDefault();
+    const order = {};
+    const time = new Date();
+
+    id = time.getTime();
+    order.tel = tel.value;
+
+    const firebase = new Firebase(`https://jsbymda-default-rtdb.firebaseio.com/orders/${id}`);
+    firebase.update(order);
+    console.log(order);
+}
+
+btn.addEventListener('click', handler);
+```
+
+3. Шаг: заполнение: пять минут - полёт "нормальный" :)
+
+
+* Задача 14: хорошенько все протестировать: можно ли все эти данные получить обратно из firebase?
 
 1. Шаг
 
@@ -205,7 +262,8 @@ fetch('https://jsbymda-default-rtdb.firebaseio.com/db.json')
 
 4. Шаг
 
-* Задача 12
+
+* Задача 15
 
 1. Шаг
 
@@ -215,17 +273,7 @@ fetch('https://jsbymda-default-rtdb.firebaseio.com/db.json')
 
 4. Шаг
 
-* Задача 13
-
-1. Шаг
-
-2. Шаг
-
-3. Шаг
-
-4. Шаг
-
-* Задача 14
+* Задача 16
 
 1. Шаг
 

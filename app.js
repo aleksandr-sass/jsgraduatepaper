@@ -1,4 +1,4 @@
-fetch('https://jsbymda-default-rtdb.firebaseio.com/db.json')
+fetch('https://jsbymda-default-rtdb.firebaseio.com/orders.json')
 .then(response => {
     return response.json();
 })

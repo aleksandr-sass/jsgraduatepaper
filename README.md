@@ -254,7 +254,22 @@ btn.addEventListener('click', handler);
 
 * Задача 14: хорошенько все протестировать: можно ли все эти данные получить обратно из firebase?
 
-1. Шаг
+1. Шаг: попытаемся прочитать содержимое ```orders.json``` из ```firebase```
+
+```
+// app.js (в новой редакции)
+fetch('https://jsbymda-default-rtdb.firebaseio.com/orders.json')
+.then(response => {
+    return response.json();
+})
+.then(response => {
+    console.log(response);
+    console.log(response.length);
+});
+```
+
+Результат: данные успешно читаются из firebase, вот только пока не ясно: что с этим всем "добром" делать...
+
 
 2. Шаг
 
